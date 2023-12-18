@@ -9,7 +9,6 @@ export default function Home() {
   return (
     <JobProvider>
       <div>
-        <h1>Hi</h1>
         <JobFeed />
         <DataFetcher/>
       </div>
