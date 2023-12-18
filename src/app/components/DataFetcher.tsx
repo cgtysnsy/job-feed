@@ -1,9 +1,12 @@
 "use client"
 import React, { useEffect, useState, useContext } from 'react';
-import {JobContext} from "../context/DataContext"
+import {JobContext} from "../context/JobContext"
 
 
 const DataFetcher = () => {
+    const [pageNumber, setPageNumber] = useState(0);
+    const [perPage, setPerPage] = useState(5);
+
     const {setError, setLoader, setJobFeedData}= useContext<any>(JobContext)
     const URL = "https://hacker-news.firebaseio.com/v0/jobstories.json"
 
@@ -14,8 +17,9 @@ const DataFetcher = () => {
             try {
             const response = await fetch(URL);
             const data = await response.json();
-                console.log(data)
+                console.log(data.splice(pageNumber * perPage, perPage))
                 setJobFeedData(data)
+
             }catch (error) {
             setError(error)
        
@@ -24,11 +28,7 @@ const DataFetcher = () => {
         }
         fetchData()
     },[])
-  return (
-    <div>
-      
-    </div>
-  )
+  return null
 }
 
 export default DataFetcher
